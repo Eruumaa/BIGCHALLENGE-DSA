@@ -6,24 +6,20 @@
 #include "utils.h"
 
 int main(){
-    WordEntry words[13000];
+    WordEntry *words = calloc(MAX_WORD, sizeof(WordEntry));
+    if (!words) { fprintf(stderr, "ERROR: Gagal mengalokasi memori untuk words\n"); return 1;}
+
     DatasetHeader header;
 
     // Load Vocab
-    load_vocab("vocab.nips.txt", words, MAX_WORD);
+    load_vocab("vocab.pubmed.txt", words, MAX_WORD);
 
     // Load Docword
-    load_docword("docword.nips.txt", words, MAX_WORD);
+    header = load_docword("docword.pubmed.txt", words, MAX_WORD);
 
-    // copy word
-    copy_entries(words, header.W);
-    
-    // printf("\n5 kata pertama dalam arr:\n");
-    // for (int i = 0; i < 5; i++) {
-    //     printf("arr[%d] = wordID:%d  word:%s  freq:%ld\n",
-    //         i, arr[i].wordID, arr[i].word, arr[i].freq);
-    // }
+    // copy word untuk sorting nanti
+    // WordEntry *arr = copy_entries(words, header.W);
 
-    // free(words);
+    free(words);
     return 0;
 }

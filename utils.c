@@ -24,7 +24,8 @@ int load_vocab(char *vocab_file, WordEntry *words, int max_word){
         count++;
     }
     fclose(fpVocab);
-    // printf("Total Vocab = %d\n", count);
+    // printf("[DEBUG] Total Vocab = %d\n", count);
+    return count;
 }
 
 DatasetHeader load_docword(char *docword_file, WordEntry *words, int max_word){
@@ -45,28 +46,56 @@ DatasetHeader load_docword(char *docword_file, WordEntry *words, int max_word){
         return header;
     }
 
-    // printf("Header dataset => D=%d  W=%d  N=%ld\n", header.D, header.W, header.N);
+    // printf("[DEBUG] Header dataset => D=%d  W=%d  N=%ld\n", header.D, header.W, header.N);
     
-    while(fscanf(fpDocword, "%d %d %d", &docID, &wordID, &countWord) == 3){
-        if(wordID >= 1 && wordID <= header.W){
-            words[wordID].freq += countWord;
+    // baca per baris data
+    char line[64];
+    while (fgets(line, sizeof(line), fpDocword))
+    {
+        char *ptr = line;
+        
+        // Parse docID
+        while (*ptr == ' ') {ptr++;}
+        docID = 0;
+        while(*ptr >= '0' && *ptr <= '9'){
+            docID = docID * 10 + (*ptr++ - '0');
         }
+        
+        // Parse wordID
+        while (*ptr == ' ') {ptr++;}
+        wordID = 0;
+        while(*ptr >= '0' && *ptr <= '9'){
+            wordID = wordID * 10 + (*ptr++ - '0');
+        }
+        
+        // Parse countWord
+        while(*ptr == ' ') {ptr++;}
+        countWord = 0;
+        while(*ptr >= '0' && *ptr <= '9'){
+            countWord = countWord * 10 + (*ptr++ - '0');
+        }
+
+        if (wordID >= 1 && wordID <= header.W)
+            words[wordID].freq += countWord;
     }
+
     fclose(fpDocword);
-    // printf("selesai docword\n");
+    // printf("[DEBUG] selesai docword\n");
+    return header;
 }
 
 WordEntry *copy_entries(WordEntry *words, int W)
 {
     WordEntry *arr = malloc(W * sizeof(WordEntry));
     if (!arr) {
-        fprintf(stderr, "ERROR: malloc gagal di copy_entries\n");
+        fprintf(stderr, "[!] malloc gagal di copy_entries\n");
         return NULL;
     }
 
     for (int i = 0; i < W; i++) {
         arr[i] = words[i + 1];
     }
+    // printf("[DEBUG] selesai copy");
     return arr;
 }
 
