@@ -6,7 +6,7 @@
 #include "utils.h"
 
 int main(){
-    WordEntry *words = calloc(MAX_WORD, sizeof(WordEntry));
+    WordEntry *words = calloc(MAX_WORD + 1, sizeof(WordEntry));
     if (!words) { fprintf(stderr, "ERROR: Gagal mengalokasi memori untuk words\n"); return 1;}
 
     DatasetHeader header;
@@ -19,6 +19,11 @@ int main(){
 
     // copy word untuk sorting nanti
     // WordEntry *arr = copy_entries(words, header.W);
+
+    // baca data
+    print_top_k_beta(words);
+    // print_top_k_beta(arr);
+    
 
     free(words);
     return 0;

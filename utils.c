@@ -99,3 +99,9 @@ WordEntry *copy_entries(WordEntry *words, int W)
     return arr;
 }
 
+void print_top_k_beta(WordEntry *arr){
+    // printf("[DEBUG] print top k\n");
+    for(int i =0; i < 5; i++){
+        printf("WordID = %d | Word = %s | Freq = %ld \n", arr[i].wordID, arr[i].word, arr[i].freq);
+    }
+}
