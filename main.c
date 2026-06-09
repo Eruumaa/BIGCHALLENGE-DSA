@@ -22,7 +22,8 @@ int main(){
     WordEntry *arr = copy_entries(words, header.W);
 
     // sorting & tampilin
-    insertionSort(arr, header.W);
+    // insertionSort(arr, header.W);
+    heap_sort(arr, header.W);
     print_top_k(arr, header.W, 10); // ini contoh 10 angka
     
 
