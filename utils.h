@@ -5,6 +5,6 @@
 int load_vocab(char *vocab_file, WordEntry *words, int max_word);
 DatasetHeader load_docword(char *docword_file, WordEntry *words, int max_word);
 WordEntry *copy_entries(WordEntry *words, int W);
-void print_top_k_beta(WordEntry *arr);
+void print_top_k(WordEntry *sorted, int total, int k);
 
 #endif
