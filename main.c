@@ -118,23 +118,31 @@ int main(){
                 break;
         
             case 4:
-                // Meskipun di menu tertulis 100, tugas meminta penentuan nilai k ketika pilihan 4 dipilih
                 printf("\nMasukkan nilai k (10 < k < 150): ");
-                scanf("%d", &k);
-                
-                printf("\n[i] Mengurutkan data menggunakan Quicksort untuk mendapatkan Top %d...\n", k);
-                arr = copy_entries(words, header.W);
-                
-                start = clock();
-                quickSort(arr, 0, header.W - 1);
-                end = clock();
-                time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
-                
-                print_top_k(arr, header.W, k);
+                if (scanf("%d", &k) != 1){
+                    printf(" [! Harap ]Masukkan Bilangan Bulat");
+                    break;
+                }
 
-                printf("\nWaktu untuk mengurutkan: %.0f ms\n", time_taken);
+                if(k > 10 && k < 150){
+                    printf("\n[i] Mengurutkan data menggunakan Quicksort untuk mendapatkan Top %d...\n", k);
+                    arr = copy_entries(words, header.W);
+                    
+                    start = clock();
+                    quickSort(arr, 0, header.W - 1);
+                    end = clock();
+                    time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
+                    
+                    print_top_k(arr, header.W, k);
+
+                    printf("\nWaktu untuk mengurutkan: %.0f ms\n", time_taken);
+                    
+                    free(arr);
+                } else {
+                    printf("Harap masukkan nilai k (10 < k < 150)");
+                    break;
+                }
                 
-                free(arr);
                 break;
 
             case 5:
