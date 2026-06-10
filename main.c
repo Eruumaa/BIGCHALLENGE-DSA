@@ -49,18 +49,11 @@ int main(){
     do {
         pilihan = -1;   
         printf("\nPilihan:\n");
-        printf("1) Urutkan data menggunakan salah satu metode pengurutan sederhana.\n");
-        printf("   Simpan keluaran dalam sebuah file teks secara descending order,\n");
-        printf("   termasuk waktu yang dibutuhkan untuk mengurutkan data tersebut.\n");
-        printf("2) Urutkan data menggunakan metode quicksort.\n");
-        printf("   Simpan keluaran dalam sebuah file teks secara descending order\n");
-        printf("   dan tampilkan waktu yang dibutuhkan untuk mengurutkan data tsb.\n");
-        printf("3) Urutkan data menggunakan metode heapsort.\n");
-        printf("   Simpan keluaran dalam sebuah file teks secara descending order\n");
-        printf("   dan tampilkan waktu yang dibutuhkan untuk mengurutkan data tsb.\n");
-        printf("4) Tampilkan ke layar monitor 100 kata dengan frekuensi terbesar\n");
-        printf("   termasuk waktu yang dibutuhkan untuk mengurutkan data tsb.\n");
-        printf("5) Selesai\n");
+        printf("  1) Urutkan dengan Insertion Sort   (simpan ke file)\n");
+        printf("  2) Urutkan dengan Quick Sort       (simpan ke file)\n");
+        printf("  3) Urutkan dengan Heap Sort        (simpan ke file)\n");
+        printf("  4) Tampilkan k kata terbesar ke layar\n");
+        printf("  5) Selesai\n");
         printf("Pilihan anda: ");
         
         // Membersihkan buffer jika user menginputkan selain angka
