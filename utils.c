@@ -14,7 +14,6 @@ int load_vocab(char *vocab_file, WordEntry *words, int max_word){
 
     while (fgets(line, sizeof(line), fpVocab) && count < MAX_WORD){
         line[strcspn(line, "\n")] = '\0';
-        line[strcspn(line, "\n")] = '\0';
 
         int id = count + 1;
         words[id].wordID = id;
