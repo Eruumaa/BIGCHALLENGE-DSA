@@ -129,7 +129,7 @@ int main(){
             case 4:
                 printf("\nMasukkan nilai k (10 < k < 150): ");
                 if (scanf("%d", &k) != 1){
-                    printf(" [! Harap ]Masukkan Bilangan Bulat");
+                    printf("\n[!] Harap Masukkan Bilangan Bulat\n");
                     break;
                 }
 
@@ -148,7 +148,7 @@ int main(){
                     
                     free(arr);
                 } else {
-                    printf("Harap masukkan nilai k (10 < k < 150)");
+                    printf("\n[!] Harap masukkan nilai k (10 < k < 150)\n");
                     break;
                 }
                 
