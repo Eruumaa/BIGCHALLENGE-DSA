@@ -16,7 +16,7 @@ int main(){
     char docwordName[256];
     char vocabName[256];
 
-    printf("Tentukan dataset : ");
+    printf("Tentukan dataset docword: ");
     scanf("%127s", docwordFile);
     
     if (strncmp(docwordFile, "docword.", 8) == 0) {
@@ -47,6 +47,7 @@ int main(){
 
     int pilihan;
     do {
+        pilihan = -1;   
         printf("\nPilihan:\n");
         printf("1) Urutkan data menggunakan salah satu metode pengurutan sederhana.\n");
         printf("   Simpan keluaran dalam sebuah file teks secara descending order,\n");
@@ -65,17 +66,19 @@ int main(){
         // Membersihkan buffer jika user menginputkan selain angka
         if (scanf("%d", &pilihan) != 1) {
             while (getchar() != '\n');
-            continue;
         }
 
         char output_file[128];
         clock_t start, end;
         double time_taken;
 
+        WordEntry *arr = NULL; 
+        int k;                  
+
         switch(pilihan) {
-            case 1: {
+            case 1: 
                 printf("\n[i] Memulai Insertion Sort...\n");
-                WordEntry *arr = copy_entries(words, header.W);
+                arr = copy_entries(words, header.W);
                 
                 start = clock();
                 insertionSort(arr, header.W);
@@ -87,11 +90,10 @@ int main(){
                 
                 free(arr);
                 break;
-            }
 
-            case 2: {
+            case 2:
                 printf("\n[i] Memulai Quicksort...\n");
-                WordEntry *arr = copy_entries(words, header.W);
+                arr = copy_entries(words, header.W);
                 
                 start = clock();
                 quickSort(arr, 0, header.W - 1);
@@ -103,11 +105,10 @@ int main(){
                 
                 free(arr);
                 break;
-            }
 
-            case 3: {
+            case 3: 
                 printf("\n[i] Memulai Heapsort...\n");
-                WordEntry *arr = copy_entries(words, header.W);
+                arr = copy_entries(words, header.W);
                 
                 start = clock();
                 heap_sort(arr, header.W);
@@ -119,16 +120,14 @@ int main(){
                 
                 free(arr);
                 break;
-            }
-
-            case 4: {
-                int k;
+        
+            case 4:
                 // Meskipun di menu tertulis 100, tugas meminta penentuan nilai k ketika pilihan 4 dipilih
                 printf("\nMasukkan nilai k (10 < k < 150): ");
                 scanf("%d", &k);
                 
                 printf("\n[i] Mengurutkan data (menggunakan Quicksort) untuk mendapatkan Top %d...\n", k);
-                WordEntry *arr = copy_entries(words, header.W);
+                arr = copy_entries(words, header.W);
                 
                 start = clock();
                 quickSort(arr, 0, header.W - 1);
@@ -140,12 +139,11 @@ int main(){
                 
                 free(arr);
                 break;
-            }
 
             case 5:
                 printf("\n[i] Program Selesai.\n");
                 break;
-
+            
             default:
                 printf("\n[!] Pilihan tidak valid!\n");
         }
