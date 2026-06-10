@@ -85,6 +85,7 @@ int main(){
                 end = clock();
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
 
+                printf("\nSelesai mengurutkan, Waktu yang diperlukan: %.0f ms\n", time_taken);
                 sprintf(output_file, "output_insertion_%s", docwordFile + 8);
                 saveToFile(output_file, arr, header.W, time_taken);
                 
@@ -100,6 +101,7 @@ int main(){
                 end = clock();
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
 
+                printf("\nSelesai mengurutkan, Waktu yang diperlukan: %.0f ms\n", time_taken);
                 sprintf(output_file, "output_quicksort_%s", docwordFile + 8);
                 saveToFile(output_file, arr, header.W, time_taken);
                 
@@ -115,6 +117,7 @@ int main(){
                 end = clock();
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
 
+                printf("\nSelesai mengurutkan, Waktu yang diperlukan: %.0f ms\n", time_taken);
                 sprintf(output_file, "output_heapsort_%s", docwordFile + 8);
                 saveToFile(output_file, arr, header.W, time_taken);
                 
@@ -135,7 +138,6 @@ int main(){
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
                 
                 print_top_k(arr, header.W, k);
-                printf("\nWaktu untuk mengurutkan: %.0f ms\n", time_taken);
                 
                 free(arr);
                 break;
