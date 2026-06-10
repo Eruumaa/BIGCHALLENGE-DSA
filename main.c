@@ -122,7 +122,7 @@ int main(){
                 printf("\nMasukkan nilai k (10 < k < 150): ");
                 scanf("%d", &k);
                 
-                printf("\n[i] Mengurutkan data (menggunakan Quicksort) untuk mendapatkan Top %d...\n", k);
+                printf("\n[i] Mengurutkan data menggunakan Quicksort untuk mendapatkan Top %d...\n", k);
                 arr = copy_entries(words, header.W);
                 
                 start = clock();
@@ -131,6 +131,8 @@ int main(){
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
                 
                 print_top_k(arr, header.W, k);
+
+                printf("\nWaktu untuk mengurutkan: %.0f ms\n", time_taken);
                 
                 free(arr);
                 break;
