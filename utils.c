@@ -14,6 +14,7 @@ int load_vocab(char *vocab_file, WordEntry *words, int max_word){
 
     while (fgets(line, sizeof(line), fpVocab) && count < MAX_WORD){
         line[strcspn(line, "\n")] = '\0';
+        line[strcspn(line, "\n")] = '\0';
 
         int id = count + 1;
         words[id].wordID = id;
@@ -106,4 +107,22 @@ void print_top_k(WordEntry *sorted, int total, int k){
     for (int i = 0; i < k; i++) {
         printf("%-5d %-30s %ld\n", i + 1, sorted[i].word, sorted[i].freq);
     }
+}
+
+void saveToFile (const char *filename, WordEntry *arr, int n, double time_taken) {
+    FILE *fp = fopen(filename, "w");
+    if (!fp) {
+        printf("[!] Gagal membuat atau membuka file %s\n", filename);
+        return;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i].freq > 0) {
+            fprintf(fp, "%s (%ld)\n", arr[i].word, arr[i].freq);
+        }
+    }
+    
+    fprintf(fp, "\nWaktu untuk mengurutkan: %.0f ms\n", time_taken);
+    fclose(fp);
+    printf("[i] Keluaran berhasil disimpan ke dalam file: %s\n", filename);
 }

@@ -3,6 +3,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "bagOfWord.h"
+#include "sorting.h"
+
+void swap (WordEntry *a, WordEntry *b) {
+    WordEntry temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 void insertionSort(WordEntry *arr, int n){
     for (int i = 1; i < n; i++) {
@@ -48,4 +55,26 @@ void heap_sort(WordEntry *arr, int n)
     // Balik array (descending)
     for (int i = 0, j = n - 1; i < j; i++, j--)
         swap(&arr[i], &arr[j]);
+}
+
+int partition (WordEntry arr[], int low, int high) {
+    long pivot = arr[high].freq;
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j].freq >= pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap (&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+void quickSort (WordEntry arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition (arr, low, high);
+        quickSort (arr, low, pi - 1);
+        quickSort (arr, pi + 1, high);
+    }
 }

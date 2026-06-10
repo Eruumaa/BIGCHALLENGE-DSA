@@ -1,1 +1,12 @@
 Data/
+docword.enron.txt
+docword.kos.txt
+docword.nips.txt
+docword.nytimes.txt
+docword.pubmed.txt
+readme.txt
+vocab.enron.txt
+vocab.kos.txt
+vocab.nips.txt
+vocab.nytimes.txt
+vocab.pubmed.txt
