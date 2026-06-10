@@ -11,34 +11,43 @@ int main(){
     WordEntry *words = calloc(MAX_WORD + 1, sizeof(WordEntry));
     if (!words) { fprintf(stderr, "ERROR: Gagal mengalokasi memori untuk words\n"); return 1;}
 
-    char vocabFile[128];
-    char docwordFile[128];
-    char docwordName[256];
-    char vocabName[256];
+    char docwordInput[256];
+    char vocabInput[256];
+    char directoryPath[256] = "";
 
-    printf("Tentukan dataset docword: ");
-    scanf("%127s", docwordFile);
-    
-    if (strncmp(docwordFile, "docword.", 8) == 0) {
-        sprintf(vocabFile, "vocab.%s", docwordFile + 8);
+    printf("Tentukan file docword: ");
+    scanf("%255s", docwordInput);
+
+    char *lastSlash = strrchr(docwordInput, '/');
+    char *lastBackslash = strrchr(docwordInput, '\\');
+    char *fileName = docwordInput; 
+
+    if (lastSlash != NULL || lastBackslash != NULL) {
+        char *lastSep = (lastSlash > lastBackslash) ? lastSlash : lastBackslash;
+        fileName = lastSep + 1; 
+        
+        int dirLen = fileName - docwordInput;
+        strncpy(directoryPath, docwordInput, dirLen);
+        directoryPath[dirLen] = '\0';
+    }
+
+    if (strncmp(fileName, "docword.", 8) == 0) {
+        sprintf(vocabInput, "%svocab.%s", directoryPath, fileName + 8);
     } else {
         printf("[!] Format file tidak sesuai. Harap masukkan nama file berformat docword.*.txt\n");
         free(words);
         return 1;
     }
 
-    sprintf(docwordName, "%s", docwordFile);
-    sprintf(vocabName, "%s", vocabFile);
+    printf("\n[i] Sedang memuat %s dan %s...\n", vocabInput, docwordInput);
 
-    printf("\n[i] Sedang memuat %s dan %s...\n", vocabName, docwordName);
-
-    int totalVocab = load_vocab(vocabName, words, MAX_WORD);
+    int totalVocab = load_vocab(vocabInput, words, MAX_WORD);
     if(totalVocab <= 0) {
         free(words);
         return 1;
     }
     
-    DatasetHeader header = load_docword(docwordName, words, MAX_WORD);
+    DatasetHeader header = load_docword(docwordInput, words, MAX_WORD);
     if(header.W <= 0 || header.D <= 0) {
         fprintf(stderr, "[!] Gagal memuat docword file atau data kosong\n");
         free(words);
@@ -79,7 +88,7 @@ int main(){
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
 
                 printf("\nSelesai mengurutkan, Waktu yang diperlukan: %.0f ms\n", time_taken);
-                sprintf(output_file, "output_insertion_%s", docwordFile + 8);
+                sprintf(output_file, "output_insertion_%s", fileName + 8);
                 saveToFile(output_file, arr, header.W, time_taken);
                 
                 free(arr);
@@ -95,7 +104,7 @@ int main(){
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
 
                 printf("\nSelesai mengurutkan, Waktu yang diperlukan: %.0f ms\n", time_taken);
-                sprintf(output_file, "output_quicksort_%s", docwordFile + 8);
+                sprintf(output_file, "output_quicksort_%s", fileName + 8);
                 saveToFile(output_file, arr, header.W, time_taken);
                 
                 free(arr);
@@ -111,7 +120,7 @@ int main(){
                 time_taken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000.0;
 
                 printf("\nSelesai mengurutkan, Waktu yang diperlukan: %.0f ms\n", time_taken);
-                sprintf(output_file, "output_heapsort_%s", docwordFile + 8);
+                sprintf(output_file, "output_heapsort_%s", fileName + 8);
                 saveToFile(output_file, arr, header.W, time_taken);
                 
                 free(arr);
