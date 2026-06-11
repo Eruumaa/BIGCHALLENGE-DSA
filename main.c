@@ -12,7 +12,7 @@ int main(){
     if (!words) { fprintf(stderr, "ERROR: Gagal mengalokasi memori untuk words\n"); return 1;}
 
     char docwordInput[256];
-    char vocabInput[256];
+    char vocabInput[512];
     char directoryPath[256] = "";
 
     printf("Tentukan file docword: ");
@@ -32,7 +32,7 @@ int main(){
     }
 
     if (strncmp(fileName, "docword.", 8) == 0) {
-        sprintf(vocabInput, "%svocab.%s", directoryPath, fileName + 8);
+        snprintf(vocabInput, sizeof(vocabInput), "%svocab.%s", directoryPath, fileName + 8);
     } else {
         printf("[!] Format file tidak sesuai. Harap masukkan nama file berformat docword.*.txt\n");
         free(words);
