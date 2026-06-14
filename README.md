@@ -100,6 +100,6 @@ Proyek ini dilengkapi dengan `makefile` agar mudah dikompilasi pada environment 
 ```
 
 📚 Referensi
-- Draf Tugas Spesifikasi Big Challenge SDA 2025/2026 - Prof. Dr. Taufik Fuadi Abidin, M.Tech.
-- Laporan Resmi Kelompok 1: Kelompok1_BIGCHALLENGE_SDA_2026a.pdf
+- Draf Tugas Spesifikasi Big Challenge SDA 2025/2026 - Prof. Dr. Taufik Fuadi Abidin, M.Tech. [Draft Tugas](https://github.com/Eruumaa/BIGCHALLENGE-DSA/blob/main/Big-Challenge-SDA-2025a.pdf)
+- Laporan Resmi Kelompok 1: [Kelompok1_BIGCHALLENGE_SDA_2026a.pdf](https://github.com/Eruumaa/BIGCHALLENGE-DSA/blob/main/Kelompok1_BIGCHALLENGE_SDA_2026a.pdf)
 - UCI Machine Learning Repository (Bag of Words Dataset): [Link Dataset](https://archive.ics.uci.edu/dataset/164/bag+of+words)
